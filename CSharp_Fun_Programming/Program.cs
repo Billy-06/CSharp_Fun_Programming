@@ -5,8 +5,9 @@ using CSharp_Fun_Programming;
 /**
  * Generic Types
  * 
- * If we try swapping value types as shown inteh code below, it fails because
- * the swap function needs a 
+ * Generic Types can be compared to the templates in C++ which allow us to
+ * create an object/method that can be used flexibly to cater for other 
+ * objects within the program.
  * 
  * 
  * */
@@ -39,6 +40,31 @@ var personTwo = new Person
 };
 
 int x = 5, y = 7;
+
+/**
+ * Examine the Code Below.
+ * 
+ * Using a regular swap function to swap values. Upon running the code you'll
+ * notice that using the regular function fails to swap the values of the passed
+ * objects and this is because we're passing, not the reference of the object but
+ * the values. Values fail to persist since they are bound by the scope of the 
+ * function.
+ * Specifying the type object also creates conflicts in mapping onto other types.
+ * 
+ * Reasons regular swap function fails:
+ * (a) We're using value types rather than reference types
+ * (b) The function specifies that it expects type object which might
+ *     make mapping onto other types diffficult.
+ * 
+ * 
+ * Generic Type
+ * > Allows for flexibility and the function can therefore be used to swap 
+ *   any object type
+ * > Since we're specifying the reference, it successfully changes the values
+ *   because the change persists beyond the swapping scope.
+ *   
+ *   
+ * */
 
 static void Swap(object first, object second)
 {
@@ -82,7 +108,7 @@ Console.WriteLine("\n\n");
  * */
 
 
-var cust = new Customer
+var cust1 = new Customer
 {
     Id = 0089,
     FirstName = "Micky",
@@ -90,10 +116,40 @@ var cust = new Customer
     CreateDate = new DateOnly(2022, 1, 20)
 };
 
+var cust2 = new Customer
+{
+    Id = 0040,
+    FirstName = "Micky",
+    LastName = "Jones",
+    CreateDate = new DateOnly(2022, 1, 20)
+};
+
+var cust3 = new Customer
+{
+    Id = 0459,
+    FirstName = "Micky",
+    LastName = "Jones",
+    CreateDate = new DateOnly(2022, 1, 20)
+};
+
+var cust4 = new Customer
+{
+    Id = 0049,
+    FirstName = "Micky",
+    LastName = "Jones",
+    CreateDate = new DateOnly(2022, 1, 20)
+};
+
 Console.WriteLine("Customer to be Mapped onto Person");
 
-cust.Print();
+cust1.Print();
 var mapper = new CustomerToPersonMapper();
-var person = mapper.Map(cust);
+var person = mapper.Map(cust1);
 Console.WriteLine("Person Details");
 person.Print();
+
+Console.WriteLine("Using the Sorter Object");
+var sorter = new Sorter<Customer>();
+var customerList = new Customer[] { cust1, cust2, cust3, cust4 };
+
+sorter.BeginSort(customerList);
