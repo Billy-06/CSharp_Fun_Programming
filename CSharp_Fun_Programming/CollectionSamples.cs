@@ -206,7 +206,7 @@ public static class CollectionSamples
             { "p", "Petro" },
             { "b", "Billy" },
             { "l", "Linette" },
-            { "l", "Laban" },
+            { "l", "Linus" },
             { "z", "Zeek" }
         };
 
